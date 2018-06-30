@@ -6,7 +6,6 @@ import com.nice.utils.JSONResult;
 import com.nice.utils.UUIDUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,7 +56,7 @@ public class AccountController {
                     return JSONResult.errorMsg("温馨提示 - 请输入验证码!");
                 }
             }else{
-                return JSONResult.errorMsg("温馨提示 - 用户不存在!");
+                return JSONResult.errorMsg("温馨提示 - 用户名、密码错误!");
             }
         }else{
             return JSONResult.errorMsg("温馨提示 - 用户名、密码不能为空!");
@@ -75,7 +74,12 @@ public class AccountController {
                     sysUser.setId(UUIDUtils.getUUID());
                     sysUser.setUsername(user.getUsername());
                     sysUser.setPassword(GetMD5Code(user.getPassword(),BIT_32));
-                    sysUserService.insert(sysUser);
+                    int i = sysUserService.insert(sysUser);
+                    if(i > 0){
+                        return JSONResult.ok("恭喜您，注册成功！");
+                    }else{
+                        return JSONResult.errorMsg("温馨提示 - 服务器繁忙，请稍后重试！");
+                    }
                 }else{
                     return JSONResult.errorMsg("温馨提示 - 图片验证码不正确！");
                 }
@@ -85,16 +89,12 @@ public class AccountController {
         }else{
             return JSONResult.errorMsg("温馨提示 - 用户名、密码不能为空！");
         }
-        return JSONResult.ok("注册成功！");
     }
-
 
     @RequestMapping(value = "id/{id}")
     public JSONResult getSysUserById(@PathVariable String id){
         SysUser user = sysUserService.getSysUserById(id);
         return JSONResult.ok(user);
     }
-
-
 
 }
