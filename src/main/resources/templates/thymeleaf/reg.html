@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .main{
+        text-align: center;
+        background-color: #fff;
+        border-radius: 20px;
+        width: 300px;
+        height: 350px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+    }
+</style>
+<body>
+    <div class="main">
+        <form th:action="@{/account/register}" method="post" th:method="post">
+            用户名：<input th:id="name" th:name="username" />
+            <br/>
+            密码：<input type="password" th:id="password" th:name="password"/>
+            <br/>
+            验证码：<input th:id="validateCode" th:name="validateCode">
+            <img class="payCode fl" id="checkImg" onclick="checkCode();" src="http://localhost:8080/ValidateCodeServlet?'+new Date().getTime())">
+            <input type="submit"/>
+        </form>
+    </div>
+
+    <script type="text/javascript">
+           function checkCode() {
+               document.getElementById('checkImg').src ='http://localhost:8080/ValidateCodeServlet?'
+                   + (new Date().getTime().toString(36));
+           }
+       </script>
+</body>
+</html>

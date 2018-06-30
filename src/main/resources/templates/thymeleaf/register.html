@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>hello</h1>
+    <br/>
+      <  <form th:action="@{/account/register}" th:object="${user}" method="post" th:method="post">
+            <input type="text" th:field="*{username}"/>
+            <input type="text" th:field="*{password}"/>
+            <img class="payCode fl" id="checkImg" onclick="checkCode();" src="http://localhost:8080/ValidateCodeServlet?'+new Date().getTime())">
+            <input type="submit"/>
+        </form>
+    <br/>
+
+    <!--<script type="text/javascript">
+        function checkCode() {
+            document.getElementById('checkImg').src ='http://localhost:8080/ValidateCodeServlet?'
+                + (new Date().getTime().toString(36));
+        }
+    </script>-->
+
+</body>
+</html>
