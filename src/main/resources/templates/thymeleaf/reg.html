@@ -26,7 +26,7 @@
             <br/>
             验证码：<input th:id="validateCode" th:name="validateCode">
             <img class="payCode fl" id="checkImg" onclick="checkCode();" src="http://localhost:8080/ValidateCodeServlet?'+new Date().getTime())">
-            <input type="submit"/>
+            <input type="submit" th:value="注册"/>
         </form>
     </div>
 
