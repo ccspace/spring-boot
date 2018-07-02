@@ -114,9 +114,9 @@ public class AccountController {
         String passWrodOld = request.getParameter("passWrod");
         String passWrodNew = request.getParameter("passWrodNew");
         if(StringUtils.isNotBlank(loginName) && StringUtils.isNotBlank(passWrodOld)){
-            SysUser user = sysUserService.getUserByLoginNameAndPassWord(loginName,passWrodOld);
+            SysUser user = sysUserService.getUserByLoginNameAndPassWord(loginName,GetMD5Code(passWrodOld,BIT_32));
             if(user != null){
-                user.setPassWord(passWrodNew);
+                user.setPassWord(GetMD5Code(passWrodNew,BIT_32));
                 int success = sysUserService.updateUserByLoginNameAndPassWord(user);
                 if(success > 0 ){
                     return JSONResult.ok("更新密码成功!");
