@@ -1,12 +1,17 @@
 package com.nice.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.nice.dao.SysUserMapper;
 import com.nice.pojo.SysUser;
 import com.nice.service.SysUserService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import tk.mybatis.mapper.entity.Example;
+
+import java.util.List;
 
 /**
  * @program: nice-springboot
@@ -56,4 +61,16 @@ public class SysUserServiceImpl implements SysUserService{
         return sysUserMapper.updateByPrimaryKeySelective(s);
     }
 
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public List<SysUser> queryListPage(SysUser user, Integer page, Integer pageSize) {
+        PageHelper .startPage(page, pageSize);
+        Example example = new Example(SysUser.class);
+        Example.Criteria criteria = example.createCriteria();
+        if(StringUtils.isNotEmpty(user.getLoginName())){
+            criteria.andLike("nickName","%" + user.getLoginName() + "%");
+        }
+        example.orderBy("registTime").desc();
+        return sysUserMapper.queryListPage(example);
+    }
 }

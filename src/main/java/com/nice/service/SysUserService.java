@@ -2,6 +2,8 @@ package com.nice.service;
 
 import com.nice.pojo.SysUser;
 
+import java.util.List;
+
 /**
  * @program: nice-springboot
  * @description:
@@ -20,5 +22,7 @@ public interface SysUserService {
     SysUser getUserByLoginNameAndPassWord(String loginName, String passWord);
 
     int updateUserByLoginNameAndPassWord(SysUser s);
+
+    List<SysUser> queryListPage(SysUser user, Integer page, Integer pageSize);
 
 }

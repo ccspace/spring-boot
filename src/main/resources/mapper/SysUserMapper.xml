@@ -239,5 +239,9 @@
   <select id="getUserByLoginNameAndPassWord" parameterType="java.lang.String" resultMap="BaseResultMap">
     SELECT <include refid="Base_Column_List"/> FROM SYS_USER WHERE login_name = #{loginName} and pass_wrod = #{passWrod}
   </select>
+
+  <select id="queryListPage" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/> FROM SYS_USER
+  </select>
   
 </mapper>

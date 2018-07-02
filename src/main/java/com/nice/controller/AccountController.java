@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import java.util.Date;
+import java.util.List;
 
 import static com.nice.servlet.ValidateCodeServlet.VALIDATE_CODE;
 import static com.nice.utils.MD5Util.BIT_32;
@@ -147,4 +147,16 @@ public class AccountController {
         return JSONResult.ok(user);
     }
 
+
+    @RequestMapping("queryListPage")
+    public JSONResult queryListPage(Integer page){
+        if(page == null){
+            page = 1;
+        }
+        int pageSize = 10;
+        SysUser pojo = new SysUser();
+        pojo.setLoginName("nice");
+        List<SysUser> listUser = sysUserService.queryListPage(pojo, page, pageSize);
+        return JSONResult.ok(listUser);
+    }
 }

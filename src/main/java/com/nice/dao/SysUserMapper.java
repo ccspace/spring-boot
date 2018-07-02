@@ -1,6 +1,9 @@
 package com.nice.dao;
 
 import com.nice.pojo.SysUser;
+import tk.mybatis.mapper.entity.Example;
+
+import java.util.List;
 
 public interface SysUserMapper {
 
@@ -19,5 +22,7 @@ public interface SysUserMapper {
 	SysUser findByName(String loginName);
 
 	SysUser getUserByLoginNameAndPassWord(String loginName,String passWrod);
+
+	List<SysUser> queryListPage(Example example);
 
 }
