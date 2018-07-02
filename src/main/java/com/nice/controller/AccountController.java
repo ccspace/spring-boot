@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import java.util.Date;
+
 import static com.nice.servlet.ValidateCodeServlet.VALIDATE_CODE;
 import static com.nice.utils.MD5Util.BIT_32;
 import static com.nice.utils.MD5Util.GetMD5Code;
@@ -74,6 +76,7 @@ public class AccountController {
                     sysUser.setId(UUIDUtils.getUUID());
                     sysUser.setLoginName(user.getLoginName());
                     sysUser.setPassWord(GetMD5Code(user.getPassWord(),BIT_32));
+                    sysUser.setRegistTime(new Date());
                     int i = sysUserService.insert(sysUser);
                     if(i > 0){
                         return JSONResult.ok("恭喜您，注册成功！");
