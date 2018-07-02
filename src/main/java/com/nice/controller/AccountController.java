@@ -108,6 +108,11 @@ public class AccountController {
         }
     }
 
+    /**
+     * 修改密码
+     * @param request
+     * @return
+     */
     @RequestMapping("passWordManage")
     public JSONResult passWordManage(HttpServletRequest request){
         String loginName = request.getParameter("loginName");
@@ -131,6 +136,11 @@ public class AccountController {
         }
     }
 
+    /**
+     * 根据id查询
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "id/{id}")
     public JSONResult getSysUserById(@PathVariable String id){
         SysUser user = sysUserService.getSysUserById(id);
