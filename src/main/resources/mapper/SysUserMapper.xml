@@ -3,9 +3,9 @@
 <mapper namespace="com.nice.dao.SysUserMapper">
   <resultMap id="BaseResultMap" type="com.nice.pojo.SysUser">
     <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="username" jdbcType="VARCHAR" property="username" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="login_name" jdbcType="VARCHAR" property="loginName" />
+    <result column="pass_word" jdbcType="VARCHAR" property="passWord" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
     <result column="age" jdbcType="INTEGER" property="age" />
     <result column="sex" jdbcType="INTEGER" property="sex" />
     <result column="job" jdbcType="INTEGER" property="job" />
@@ -21,8 +21,8 @@
     <result column="regist_time" jdbcType="TIMESTAMP" property="registTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, username, password, nickname, age, sex, job, face_image, province, city, district, 
-    address, auth_salt, last_login_ip, last_login_time, is_delete, regist_time
+    id, login_name, pass_word, nick_name, age, sex, job, face_image, province, city, 
+    district, address, auth_salt, last_login_ip, last_login_time, is_delete, regist_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -35,14 +35,14 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.nice.pojo.SysUser">
-    insert into sys_user (id, username, password, 
-      nickname, age, sex, 
+    insert into sys_user (id, login_name, pass_word, 
+      nick_name, age, sex, 
       job, face_image, province, 
       city, district, address, 
       auth_salt, last_login_ip, last_login_time, 
       is_delete, regist_time)
-    values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{nickname,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{sex,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=VARCHAR}, #{loginName,jdbcType=VARCHAR}, #{passWord,jdbcType=VARCHAR}, 
+      #{nickName,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{sex,jdbcType=INTEGER}, 
       #{job,jdbcType=INTEGER}, #{faceImage,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
       #{city,jdbcType=VARCHAR}, #{district,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
       #{authSalt,jdbcType=VARCHAR}, #{lastLoginIp,jdbcType=VARCHAR}, #{lastLoginTime,jdbcType=TIMESTAMP}, 
@@ -54,14 +54,14 @@
       <if test="id != null">
         id,
       </if>
-      <if test="username != null">
-        username,
+      <if test="loginName != null">
+        login_name,
       </if>
-      <if test="password != null">
-        password,
+      <if test="passWord != null">
+        pass_word,
       </if>
-      <if test="nickname != null">
-        nickname,
+      <if test="nickName != null">
+        nick_name,
       </if>
       <if test="age != null">
         age,
@@ -107,14 +107,14 @@
       <if test="id != null">
         #{id,jdbcType=VARCHAR},
       </if>
-      <if test="username != null">
-        #{username,jdbcType=VARCHAR},
+      <if test="loginName != null">
+        #{loginName,jdbcType=VARCHAR},
       </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
+      <if test="passWord != null">
+        #{passWord,jdbcType=VARCHAR},
       </if>
-      <if test="nickname != null">
-        #{nickname,jdbcType=VARCHAR},
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
       </if>
       <if test="age != null">
         #{age,jdbcType=INTEGER},
@@ -160,14 +160,14 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.nice.pojo.SysUser">
     update sys_user
     <set>
-      <if test="username != null">
-        username = #{username,jdbcType=VARCHAR},
+      <if test="loginName != null">
+        login_name = #{loginName,jdbcType=VARCHAR},
       </if>
-      <if test="password != null">
-        password = #{password,jdbcType=VARCHAR},
+      <if test="passWord != null">
+        pass_word = #{passWord,jdbcType=VARCHAR},
       </if>
-      <if test="nickname != null">
-        nickname = #{nickname,jdbcType=VARCHAR},
+      <if test="nickName != null">
+        nick_name = #{nickName,jdbcType=VARCHAR},
       </if>
       <if test="age != null">
         age = #{age,jdbcType=INTEGER},
@@ -213,9 +213,9 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.nice.pojo.SysUser">
     update sys_user
-    set username = #{username,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      nickname = #{nickname,jdbcType=VARCHAR},
+    set login_name = #{loginName,jdbcType=VARCHAR},
+      pass_word = #{passWord,jdbcType=VARCHAR},
+      nick_name = #{nickName,jdbcType=VARCHAR},
       age = #{age,jdbcType=INTEGER},
       sex = #{sex,jdbcType=INTEGER},
       job = #{job,jdbcType=INTEGER},
@@ -231,8 +231,9 @@
       regist_time = #{registTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
-
-  <select id="findByName" parameterType="java.lang.String" resultMap="BaseResultMap">
-    SELECT <include refid="Base_Column_List"/> FROM sys_user WHERE username = #{loginName,jdbcType=VARCHAR}
+  
+   <select id="findByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/> FROM sys_user WHERE login_name = #{loginName,jdbcType=VARCHAR}
   </select>
+  
 </mapper>

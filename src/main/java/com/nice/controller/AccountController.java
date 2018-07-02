@@ -44,7 +44,7 @@ public class AccountController {
             if(user != null){
                 if(StringUtils.isNotBlank(validateCode)){
                     if(sessionCode.toUpperCase().equalsIgnoreCase(validateCode.toUpperCase())){
-                        if(loginName.equals(user.getUsername()) && GetMD5Code(passWrod,BIT_32).equals(user.getPassword()) ){
+                        if(loginName.equals(user.getLoginName()) && GetMD5Code(passWrod,BIT_32).equals(user.getPassWord()) ){
                             return JSONResult.ok("登陆成功!");
                         }else{
                             return JSONResult.errorMsg("温馨提示 - 登陆失败，请稍后重试!");
@@ -66,14 +66,14 @@ public class AccountController {
     @PostMapping("register")
     public JSONResult register(SysUser user,String validateCode,HttpSession session){
         String sessionCode = (String) session.getAttribute(VALIDATE_CODE);
-        if(StringUtils.isNoneBlank(user.getUsername()) && StringUtils.isNotBlank(user.getPassword())){
-            SysUser userByName = sysUserService.findByName(user.getUsername());
+        if(StringUtils.isNoneBlank(user.getLoginName()) && StringUtils.isNotBlank(user.getPassWord())){
+            SysUser userByName = sysUserService.findByName(user.getLoginName());
             if(userByName == null){
                 if(StringUtils.isNotBlank(validateCode) && sessionCode.toUpperCase().equalsIgnoreCase(validateCode.toUpperCase())){
                     SysUser sysUser = new SysUser();
                     sysUser.setId(UUIDUtils.getUUID());
-                    sysUser.setUsername(user.getUsername());
-                    sysUser.setPassword(GetMD5Code(user.getPassword(),BIT_32));
+                    sysUser.setLoginName(user.getLoginName());
+                    sysUser.setPassWord(GetMD5Code(user.getPassWord(),BIT_32));
                     int i = sysUserService.insert(sysUser);
                     if(i > 0){
                         return JSONResult.ok("恭喜您，注册成功！");
