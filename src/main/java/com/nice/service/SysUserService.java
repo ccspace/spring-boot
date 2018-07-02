@@ -1,9 +1,6 @@
 package com.nice.service;
 
-import com.nice.dao.SysUserMapper;
 import com.nice.pojo.SysUser;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 /**
  * @program: nice-springboot
@@ -12,30 +9,16 @@ import org.springframework.stereotype.Service;
  * @create: 2018-06-29 16:48
  **/
 
-@Service
-public class SysUserService {
+public interface SysUserService {
 
-    @Autowired
-    private SysUserMapper sysUserMapper;
+    int insert(SysUser user);
 
-    public int insert(SysUser user){
-        return sysUserMapper.insert(user);
-    }
+    SysUser getSysUserById(String id);
 
-    public SysUser getSysUserById(String id){
-        return sysUserMapper.selectByPrimaryKey(id);
-    }
+    SysUser findByName(String name);
 
-    public SysUser findByName(String name){
-        return sysUserMapper.findByName(name);
-    }
+    SysUser getUserByLoginNameAndPassWord(String loginName, String passWord);
 
-    public SysUser getUserByLoginNameAndPassWord(String loginName, String passWord){
-        return sysUserMapper.getUserByLoginNameAndPassWord(loginName,passWord);
-    }
-
-    public int updateUserByLoginNameAndPassWord(SysUser s){
-        return sysUserMapper.updateByPrimaryKeySelective(s);
-    }
+    int updateUserByLoginNameAndPassWord(SysUser s);
 
 }

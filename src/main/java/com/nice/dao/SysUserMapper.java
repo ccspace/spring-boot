@@ -3,6 +3,7 @@ package com.nice.dao;
 import com.nice.pojo.SysUser;
 
 public interface SysUserMapper {
+
     int deleteByPrimaryKey(String id);
 
     int insert(SysUser record);
@@ -16,4 +17,7 @@ public interface SysUserMapper {
     int updateByPrimaryKey(SysUser record);
 	
 	SysUser findByName(String loginName);
+
+	SysUser getUserByLoginNameAndPassWord(String loginName,String passWrod);
+
 }
