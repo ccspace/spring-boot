@@ -235,5 +235,9 @@
    <select id="findByName" parameterType="java.lang.String" resultMap="BaseResultMap">
     SELECT <include refid="Base_Column_List"/> FROM sys_user WHERE login_name = #{loginName,jdbcType=VARCHAR}
   </select>
+
+  <select id="getUserByLoginNameAndPassWord" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/> FROM SYS_USER WHERE login_name = #{loginName} and pass_wrod = #{passWrod}
+  </select>
   
 </mapper>

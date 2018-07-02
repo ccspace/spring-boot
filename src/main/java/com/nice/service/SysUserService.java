@@ -2,7 +2,6 @@ package com.nice.service;
 
 import com.nice.dao.SysUserMapper;
 import com.nice.pojo.SysUser;
-import com.nice.utils.JSONResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +28,14 @@ public class SysUserService {
 
     public SysUser findByName(String name){
         return sysUserMapper.findByName(name);
+    }
+
+    public SysUser getUserByLoginNameAndPassWord(String loginName, String passWord){
+        return sysUserMapper.getUserByLoginNameAndPassWord(loginName,passWord);
+    }
+
+    public int updateUserByLoginNameAndPassWord(SysUser s){
+        return sysUserMapper.updateByPrimaryKeySelective(s);
     }
 
 }

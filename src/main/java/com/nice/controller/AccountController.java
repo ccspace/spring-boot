@@ -35,6 +35,13 @@ public class AccountController {
     @Autowired
     private SysUserService sysUserService;
 
+    /**
+     * 登录
+     * @param request
+     * @param response
+     * @param session
+     * @return
+     */
     @RequestMapping("login")
     public JSONResult login(HttpServletRequest request, HttpServletResponse response,HttpSession session){
         String loginName = request.getParameter("loginName");
@@ -65,10 +72,17 @@ public class AccountController {
         }
     }
 
+    /**
+     * 注册
+     * @param user
+     * @param validateCode
+     * @param session
+     * @return
+     */
     @PostMapping("register")
     public JSONResult register(SysUser user,String validateCode,HttpSession session){
         String sessionCode = (String) session.getAttribute(VALIDATE_CODE);
-        if(StringUtils.isNoneBlank(user.getLoginName()) && StringUtils.isNotBlank(user.getPassWord())){
+        if(StringUtils.isNotBlank(user.getLoginName()) && StringUtils.isNotBlank(user.getPassWord())){
             SysUser userByName = sysUserService.findByName(user.getLoginName());
             if(userByName == null){
                 if(StringUtils.isNotBlank(validateCode) && sessionCode.toUpperCase().equalsIgnoreCase(validateCode.toUpperCase())){
@@ -91,6 +105,29 @@ public class AccountController {
             }
         }else{
             return JSONResult.errorMsg("温馨提示 - 用户名、密码不能为空！");
+        }
+    }
+
+    @RequestMapping("passWordManage")
+    public JSONResult passWordManage(HttpServletRequest request){
+        String loginName = request.getParameter("loginName");
+        String passWrodOld = request.getParameter("passWrod");
+        String passWrodNew = request.getParameter("passWrodNew");
+        if(StringUtils.isNotBlank(loginName) && StringUtils.isNotBlank(passWrodOld)){
+            SysUser user = sysUserService.getUserByLoginNameAndPassWord(loginName,passWrodOld);
+            if(user != null){
+                user.setPassWord(passWrodNew);
+                int success = sysUserService.updateUserByLoginNameAndPassWord(user);
+                if(success > 0 ){
+                    return JSONResult.ok("更新密码成功!");
+                }else{
+                    return JSONResult.errorMsg("温馨提示 - 更新密码失败,请稍后重试!");
+                }
+            }else{
+                return JSONResult.errorMap("温馨提示 - 请检查用户名、密码是否正确!");
+            }
+        }else{
+            return JSONResult.errorMap("温馨提示 - 请检查用户名、密码是否正确!");
         }
     }
 
