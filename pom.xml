@@ -113,6 +113,28 @@
 			<version>2.6</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper -->
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper</artifactId>
+			<version>5.1.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-all</artifactId>
+			<version>5.15.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin.external.google</groupId>
+			<artifactId>android-json</artifactId>
+			<version>0.0.20131108.vaadin1</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
