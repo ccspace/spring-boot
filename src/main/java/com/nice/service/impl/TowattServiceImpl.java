@@ -27,6 +27,11 @@ public class TowattServiceImpl  implements TowattUserService {
     private TowattUserMapper towattUserMapper;
 
     @Override
+    public int insert(TowattUser record) {
+        return towattUserMapper.insert(record);
+    }
+
+    @Override
     public TowattUser findByName(String name) {
         return towattUserMapper.findByName(name);
     }

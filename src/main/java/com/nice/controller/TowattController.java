@@ -2,17 +2,15 @@ package com.nice.controller;
 
 import com.nice.pojo.TowattUser;
 import com.nice.service.TowattUserService;
-import com.nice.utils.MD5Util;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
-import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 /**
@@ -36,8 +34,31 @@ public class TowattController {
     @Autowired
     private TowattUserService towattUserService;
 
-    @RequestMapping("sublogin")
-    public String subLogin(TowattUser user){
+    @RequestMapping("doRegister")
+    public String doRegister(@RequestParam("username")String userName,
+                             @RequestParam("password")String passWd){
+
+        try{
+            TowattUser u = towattUserService.findByName(userName);
+            if(u == null){
+                ByteSource salt = ByteSource.Util.bytes(userName);
+                String newPwd = new SimpleHash("md5",passWd,salt,1024).toHex();
+                TowattUser user = new TowattUser();
+                user.setUsername(userName);
+                user.setPassword(newPwd);
+                user.setSalt(salt.toString());
+                towattUserService.insert(user);
+            }else{
+                System.out.println("用户名已经被占用！");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return "thymeleaf/success";
+    }
+
+    @RequestMapping("doLogin")
+    public String doLogin(TowattUser user){
         String userName = user.getUsername();
         System.out.println("当前用户：" + user.getUsername());
         UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(),user.getPassword());
@@ -67,7 +88,7 @@ public class TowattController {
             return "thymeleaf/index";
         }else{
             token.clear();
-            return "thymeleaf/sublogin";
+            return "thymeleaf/dologin";
         }
     }
 
