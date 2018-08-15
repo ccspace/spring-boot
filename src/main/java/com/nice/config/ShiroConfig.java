@@ -31,23 +31,23 @@ public class ShiroConfig {
     public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
-        shiroFilterFactoryBean.setLoginUrl("/login");
+        shiroFilterFactoryBean.setLoginUrl("/th/login");
         shiroFilterFactoryBean.setSuccessUrl("/index");
 
         //未授权页面
         shiroFilterFactoryBean.setUnauthorizedUrl("/err");
 
         //配置访问权限
-//        LinkedHashMap<String, String> filterChainDefinitionMap=new LinkedHashMap<>();
-//        filterChainDefinitionMap.put("/login", "anon");
-//        filterChainDefinitionMap.put("/register","anon");
-//
-//        //配置退出 shiro已经实现退出
-//        filterChainDefinitionMap.put("/logout","logout");
-//
-//        //其他请求需要认证
-//        filterChainDefinitionMap.put("/**", "authc");
-//        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
+        LinkedHashMap<String, String> filterChainDefinitionMap=new LinkedHashMap<>();
+        filterChainDefinitionMap.put("/login", "anon");
+        filterChainDefinitionMap.put("/register","anon");
+
+        //配置退出 shiro已经实现退出
+        filterChainDefinitionMap.put("/logout","logout");
+
+        //其他请求需要认证
+        filterChainDefinitionMap.put("/**", "authc");
+        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
 
     }
@@ -70,7 +70,7 @@ public class ShiroConfig {
     public HashedCredentialsMatcher hashedCredentialsMatcher(){
         HashedCredentialsMatcher  hashedCredentialsMatcher = new HashedCredentialsMatcher();
         hashedCredentialsMatcher.setHashAlgorithmName("md5");          //md5算法
-        hashedCredentialsMatcher.setHashIterations(1024);                 //散列次数
+        hashedCredentialsMatcher.setHashIterations(1024);              //散列次数
         hashedCredentialsMatcher.setStoredCredentialsHexEncoded(true); //散列后为16进制
         return hashedCredentialsMatcher;
     }
