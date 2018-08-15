@@ -10,7 +10,7 @@ import java.util.List;
  * @Title: JSONResult.java
  * @Package com.nice.utils
  * @Description: 自定义响应数据结构
- * 				这个类是提供给门户，ios，安卓，微信商城用的
+ * 				这个类是提供给门户，ios，安卓，微信用的
  * 				门户接受此类数据后需要使用本类的方法转换成对于的数据类型格式（类，或者list）
  * 				其他自行处理
  * 				200：表示成功
@@ -18,11 +18,11 @@ import java.util.List;
  * 				501：bean验证错误，不管多少个错误都以map形式返回
  * 				502：拦截器拦截到用户token出错
  * 				555：异常抛出信息
- * Copyright: Copyright (c) 2016
- * Company:Nathan.nice.Salvatore
+ * Copyright: Copyright (c) 2018
+ * Company:Towatt.nice.Salvatore
  * 
  * @author nice
- * @date 2018年8月28日 下午21:39:36
+ * @date 2018年8月14日 下午14:39:36
  * @version V1.0
  */
 public class JSONResult {
@@ -150,9 +150,8 @@ public class JSONResult {
      * @Description: 没有object对象的转化
      * @param json
      * @return
-     * 
-     * @author leechenxiang
-     * @date 2016年4月22日 下午8:35:21
+     * @author nice
+     * @date 2018年4月22日 下午8:35:21
      */
     public static JSONResult format(String json) {
         try {

@@ -10,8 +10,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @ServletComponentScan
 @MapperScan("com.nice.dao")
-@EnableScheduling//开启定时任务
-@EnableAsync	 //开启异步调用
+//@EnableScheduling//开启定时任务
+//@EnableAsync	 //开启异步调用
 public class NiceApplication {
 
 	public static void main(String[] args) {

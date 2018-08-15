@@ -13,4 +13,9 @@ public class ThymeleafController {
         return "thymeleaf/reg";
     }
 
+    @RequestMapping("sub")
+    public String login(Model model){
+        return "thymeleaf/sublogin";
+    }
+
 }
