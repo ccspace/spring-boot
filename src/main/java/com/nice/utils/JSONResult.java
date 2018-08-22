@@ -19,7 +19,7 @@ import java.util.List;
  * 				502：拦截器拦截到用户token出错
  * 				555：异常抛出信息
  * Copyright: Copyright (c) 2018
- * Company:Towatt.nice.Salvatore
+ * Company:Towatt.nice.
  * 
  * @author nice
  * @date 2018年8月14日 下午14:39:36
@@ -115,7 +115,7 @@ public class JSONResult {
 
     /**
      * 
-     * @Description: 将json结果集转化为LeeJSONResult对象
+     * @Description: 将json结果集转化为JSONResult对象
      * 				需要转换的对象是一个类
      * @param jsonData
      * @param clazz

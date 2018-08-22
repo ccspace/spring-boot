@@ -24,7 +24,7 @@
             <br/>
             密码：<input type="password" th:id="password" th:name="password"/>
             <br/>
-            验证码：<input type="text" th:id="validateCode" th:name="validateCode">
+            图片验证码：<input type="text" th:id="validateCode" th:name="validateCode">
             <img class="payCode fl" id="checkImg" onclick="checkCode();" src="http://localhost:8080/ValidateCodeServlet?'+new Date().getTime())">
             <input type="submit" th:value="注册"/>
         </form>

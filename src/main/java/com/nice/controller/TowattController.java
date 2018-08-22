@@ -2,6 +2,7 @@ package com.nice.controller;
 
 import com.nice.pojo.TowattUser;
 import com.nice.service.TowattUserService;
+import io.swagger.annotations.*;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.crypto.hash.SimpleHash;
@@ -10,6 +11,7 @@ import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -29,12 +31,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("towatt")
+@Api(tags = "企业会员接口",value = "企业用户controller")
 public class TowattController {
 
     @Autowired
     private TowattUserService towattUserService;
 
-    @RequestMapping("doRegister")
+    @RequestMapping(method = RequestMethod.POST, value = "doRegister" )
+    @ApiOperation(value = "用户注册",notes = "企业会员注册")
+    @ApiImplicitParams({
+                    @ApiImplicitParam(name = "username", value = "企业注册名称", required = true),
+                    @ApiImplicitParam(name = "password", value = "企业注册密码", required = true)
+            })
     public String doRegister(@RequestParam("username")String userName,
                              @RequestParam("password")String passWd){
 
@@ -57,11 +65,16 @@ public class TowattController {
         return "thymeleaf/success";
     }
 
-    @RequestMapping("doLogin")
-    public String doLogin(TowattUser user){
-        String userName = user.getUsername();
-        System.out.println("当前用户：" + user.getUsername());
-        UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(),user.getPassword());
+    @RequestMapping(value = "doLogin", method = RequestMethod.POST)
+    @ApiOperation(value = "用户登陆", notes = "企业会员登陆")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "username", value = "企业登陆名称", required = true),
+            @ApiImplicitParam(name = "password", value = "企业登陆密码", required = true)
+    })
+    public String doLogin(@RequestParam("username")String userName,
+                          @RequestParam("password")String password){
+        System.out.println("当前用户：" + userName);
+        UsernamePasswordToken token = new UsernamePasswordToken(userName,password);
 
         Subject subject = SecurityUtils.getSubject();
         token.setRememberMe(true);

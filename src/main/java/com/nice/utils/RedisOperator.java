@@ -12,8 +12,8 @@ import java.util.concurrent.TimeUnit;
  * 
  * @Title: RedisOperator.java
  * @Package com.nice.utils
- * @Description: 使用redisTemplate的操作实现类 Copyright: Copyright (c) 2016
- *               Company:FURUIBOKE.SCIENCE.AND.TECHNOLOGY
+ * @Description: 使用redisTemplate的操作实现类 Copyright: Copyright (c) 2018
+ *               Company:towatt.SCIENCE.AND.TECHNOLOGY
  * 
  * @author nice
  * @date 2018年6月29日 下午0:25:03

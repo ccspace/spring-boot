@@ -34,20 +34,21 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setLoginUrl("/th/login");
         shiroFilterFactoryBean.setSuccessUrl("/index");
 
-        //未授权页面
-        shiroFilterFactoryBean.setUnauthorizedUrl("/err");
-
-        //配置访问权限
-        LinkedHashMap<String, String> filterChainDefinitionMap=new LinkedHashMap<>();
-        filterChainDefinitionMap.put("/login", "anon");
-        filterChainDefinitionMap.put("/register","anon");
-
-        //配置退出 shiro已经实现退出
-        filterChainDefinitionMap.put("/logout","logout");
-
-        //其他请求需要认证
-        filterChainDefinitionMap.put("/**", "authc");
-        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
+//        //未授权页面
+//        shiroFilterFactoryBean.setUnauthorizedUrl("/err");
+//
+//        //配置访问权限
+//        LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
+//        filterChainDefinitionMap.put("/login", "anon");
+//        filterChainDefinitionMap.put("/register","anon");
+//        filterChainDefinitionMap.put("/swagger-ui.html","anon");
+//
+//        //配置退出 shiro已经实现退出
+//        filterChainDefinitionMap.put("/logout","logout");
+//
+//        //其他请求需要认证
+//        filterChainDefinitionMap.put("/**", "authc");
+//        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
 
     }
