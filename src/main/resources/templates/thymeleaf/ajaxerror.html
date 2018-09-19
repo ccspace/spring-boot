@@ -13,4 +13,16 @@
 
 <script th:src="@{/static/js/ajaxerror.js}"></script>
 </body>
+
+<script>
+    AjaxUtil.request({
+        url:"servlet/UserJsonServlet",
+        params:{id:userid},
+        type:'json',
+        callback:process
+    });
+
+  
+
+</script>
 </html>

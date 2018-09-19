@@ -532,7 +532,7 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils {
 	 * date1 > date2 返回 1
 	 * date1 = date2 返回0
 	 * date1 < date2 返回-1
-	 * @author nice
+	 * @author baofei
 	 * @param date1
 	 * @param date2
 	 * @return
